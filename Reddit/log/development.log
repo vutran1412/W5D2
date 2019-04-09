@@ -1,0 +1,158 @@
+  [1m[35m (1.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Reddit_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Reddit_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (940.3ms)[0m  [1m[35mCREATE DATABASE "Reddit_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (367.9ms)[0m  [1m[35mCREATE DATABASE "Reddit_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (294.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (26.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8057437283407492260)[0m
+  ↳ bin/rails:9
+  [1m[35m (14.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20190409180039)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (103.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409180039_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (107.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409180039"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateSubs (20190409180304)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "subs" ("id" bigserial primary key, "title" character varying NOT NULL, "description" text NOT NULL, "post_id" integer, "moderator" integer NOT NULL, "sub_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409180304_create_subs.rb:3
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE  INDEX  "index_subs_on_post_id" ON "subs"  ("post_id")[0m
+  ↳ db/migrate/20190409180304_create_subs.rb:12
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_subs_on_moderator" ON "subs"  ("moderator")[0m
+  ↳ db/migrate/20190409180304_create_subs.rb:13
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_subs_on_sub_id" ON "subs"  ("sub_id")[0m
+  ↳ db/migrate/20190409180304_create_subs.rb:14
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409180304"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreatePosts (20190409180444)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (22.3ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "title" character varying NOT NULL, "url" character varying NOT NULL, "content" text NOT NULL, "sub_id" integer, "post_id" integer, "author" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409180444_create_posts.rb:3
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_sub_id" ON "posts"  ("sub_id")[0m
+  ↳ db/migrate/20190409180444_create_posts.rb:13
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_post_id" ON "posts"  ("post_id")[0m
+  ↳ db/migrate/20190409180444_create_posts.rb:14
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_author" ON "posts"  ("author")[0m
+  ↳ db/migrate/20190409180444_create_posts.rb:15
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409180444"]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateComments (20190409180631)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (36.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "content" text NOT NULL, "author" integer NOT NULL, "post_id" integer, "comment_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409180631_create_comments.rb:3
+  [1m[35m (15.4ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_author" ON "comments"  ("author")[0m
+  ↳ db/migrate/20190409180631_create_comments.rb:11
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_post_id" ON "comments"  ("post_id")[0m
+  ↳ db/migrate/20190409180631_create_comments.rb:12
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_comment_id" ON "comments"  ("comment_id")[0m
+  ↳ db/migrate/20190409180631_create_comments.rb:13
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409180631"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (34.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (13.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-04-09 18:11:54.562889"], ["updated_at", "2019-04-09 18:11:54.562889"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(8057437283407492260)[0m
+  ↳ bin/rails:9
+  [1m[35m (21.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/var/rbenv/versions/2.5.0/bin/annotate:23
+Started GET "/" for ::1 at 2019-04-09 11:46:27 -0700
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/var/rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/var/rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/var/rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (5.8ms)
+Completed 200 OK in 116ms (Views: 39.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/session/new" for ::1 at 2019-04-09 11:46:57 -0700
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/var/rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2232.5ms)
+Started GET "/session/new" for ::1 at 2019-04-09 11:47:01 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 4464ms (Views: 4280.4ms | ActiveRecord: 8.2ms)
+
+
+Completed 200 OK in 1356ms (Views: 1351.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2019-04-09 11:47:20 -0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 54ms (Views: 50.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2019-04-09 11:47:30 -0700
+
+AbstractController::ActionNotFound - The action 'create' could not be found for UsersController:
+
+Started POST "/__better_errors/f1e602efa3e73643/variables" for ::1 at 2019-04-09 11:47:31 -0700
+Started POST "/users" for ::1 at 2019-04-09 11:50:21 -0700
+
+SyntaxError - syntax error, unexpected end-of-input, expecting keyword_end:
+  app/controllers/users_controller.rb:16:in `'
+
+Started POST "/__better_errors/f8ae37abd851bbc3/variables" for ::1 at 2019-04-09 11:50:22 -0700
+Started POST "/users" for ::1 at 2019-04-09 11:50:35 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WwUqVE8E8kBvn/AdGegPKk2vJ5u44Gvm7l+G3Gm8lpgTKsmerUPik571toljb+uaIwvfDWBiC5Y7GF4QhNHOxg==", "user"=>{"username"=>"usernam", "password"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (2.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "usernam"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "66uz7wPB6mLPNLZjtrIcng"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (11.7ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "usernam"], ["password_digest", "$2a$10$IzwEuAHWYy0qJT28DZK9fuunb2IEYyikQU2Q9vn29ADBE2hS6.9JW"], ["session_token", "66uz7wPB6mLPNLZjtrIcng"], ["created_at", "2019-04-09 18:50:35.395996"], ["updated_at", "2019-04-09 18:50:35.395996"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (17.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:46
+  [1m[36mUser Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "usernam"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:46
+  [1m[36mUser Exists (3.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "m_aweSnyUBJtsOLQuB2Upw"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:46
+  [1m[36mUser Update (28.4ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "m_aweSnyUBJtsOLQuB2Upw"], ["updated_at", "2019-04-09 18:50:35.437043"], ["id", 1]]
+  ↳ app/models/user.rb:46
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:46
+Completed 500 Internal Server Error in 535ms (ActiveRecord: 88.5ms)
+
+
+
+NameError - undefined local variable or method `subs_url' for #<UsersController:0x00007fafa2c8b910>:
+  app/controllers/users_controller.rb:11:in `create'
+
+Started POST "/__better_errors/c26d1a04ccd8dff7/variables" for ::1 at 2019-04-09 11:50:36 -0700
