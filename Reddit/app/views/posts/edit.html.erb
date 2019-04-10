@@ -1,0 +1,15 @@
+<h1>Edit Post</h1>
+<form action="<%= posts_url %>" method="post">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<label for="title">Title</label>
+<input id="title" type="text" name="post[title]" value="<%= @post.title %>">
+<br>
+<label for="url">URL</label>
+<input id="url" type="text" name="post[url]" value="<%= @post.url %>">
+<br>
+<label for="content">Content</label>
+<input id="content" type="textarea" name="post[content]">
+<br>
+<input type="submit">
+
+</form>

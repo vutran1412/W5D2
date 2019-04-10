@@ -14,8 +14,8 @@
 class Comment < ApplicationRecord
   validates :content, :author, presence: true
 
-  belongs_to :post
-  belongs_to :comment
+  belongs_to :post, optional: true
+  belongs_to :comment, optional: true
   has_many :comments
-  belongs_to :author, foreign_key: :author, class_name: :User
+  belongs_to :user, foreign_key: :author, class_name: :User
 end

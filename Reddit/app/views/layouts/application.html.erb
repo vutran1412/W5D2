@@ -10,6 +10,24 @@
   </head>
 
   <body>
+
+    <%= flash[:errors] if flash[:errors] %>
+    
+    <% if logged_in? %>
+      <a href="<%= new_sub_url %>">New Sub</a>
+      <br>
+      <a href="<%= subs_url %>">All Subs</a>
+      <br>
+      <%= current_user.username %>
+      <%= form_for :user, method: "destroy" do |f| %>
+          <%= f.submit "Sign Out" %>
+      <% end %>
+        
+    <% else %>
+      <a href="<%= new_session_url %>">Sign In</a>
+      <br>
+      <a href="<%= new_user_url %>">Sign Up</a>
+    <% end %>
     <%= yield %>
   </body>
 </html>

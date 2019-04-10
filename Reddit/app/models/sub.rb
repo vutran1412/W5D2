@@ -15,10 +15,7 @@
 class Sub < ApplicationRecord
   validates :title, :description, :moderator, presence: true
 
-  belongs_to :moderator, foreign_key: :moderator, class_name: :User
-  belongs_to :post
-  belongs_to :sub, foreign_key: :sub_id, class_name: :Sub
+  belongs_to :user, foreign_key: :moderator, class_name: :User
   has_many :posts
-  has_many :subs, foreign_key: :sub_id, class_name: :Sub
   has_many :comments
 end

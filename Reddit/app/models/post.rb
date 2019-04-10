@@ -17,9 +17,9 @@ class Post < ApplicationRecord
 
   validates :title, :url, :content, :author, presence: true
 
-  belongs_to :sub
-  belongs_to :post
-  belongs_to :author, foreign_key: :author, class_name: :User
+  belongs_to :sub, optional: true
+  belongs_to :post, optional: true
+  belongs_to :user, foreign_key: :author, class_name: :User
   has_many :subs
   has_many :comments
 end
